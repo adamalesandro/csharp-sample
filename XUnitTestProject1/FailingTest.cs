@@ -8,12 +8,12 @@ namespace XUnitTestProject1
         [Fact(DisplayName = "Oh no! This test will fail")]
         public void ThisTestWillFail()
         {
-            var security = new Security { Ticker = "AAPL" };
-            var trade = new Trade(security) { Shares = 100m, Price = 1m };
+            var security = new Security { Ticker = "AAPL", PricingFactor = 1m };
+            var trade = new Trade(security) { TradeDirection = Direction.SELL, Shares = 100m, Price = 1m, Commission = 1.11m };
 
             Assert.Equal(100m, trade.Shares);
             Assert.Equal(1m, trade.Price);
-            Assert.Equal(100m, trade.Proceeds);
+            Assert.Equal(98.89m, trade.Proceeds);
         }
     }
 }

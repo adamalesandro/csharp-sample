@@ -27,6 +27,16 @@ namespace XUnitTestProject1
             Assert.Equal(200009.99m, trade.Proceeds);
         }
 
+        [Fact(DisplayName = "Cover Proceeds has expected value")]
+        public void CoverProceedsHasExpectedValue()
+        {
+            var security = new Security { Ticker = "GME", PricingFactor = 2m };
+
+            var trade = new Trade(security) { TradeDirection = Direction.COVER, Shares = 100m, Price = 20m, Commission = 7.50m };
+
+            Assert.Equal(4007.5m, trade.Proceeds);
+        }
+
         [Fact(DisplayName = "Sell Proceeds has expected value")]
         public void SellProceedsHasExpectedValue()
         {
@@ -35,6 +45,16 @@ namespace XUnitTestProject1
             var trade = new Trade(security) { TradeDirection = Direction.SELL, Shares = 10000m, Price = 20m, Commission = 9.99m };
 
             Assert.Equal(199990.01m, trade.Proceeds);
+        }
+
+        [Fact(DisplayName = "Short Proceeds has expected value")]
+        public void ShortProceedsHasExpectedValue()
+        {
+            var security = new Security { Ticker = "GME", PricingFactor = 2m };
+
+            var trade = new Trade(security) { TradeDirection = Direction.SHORT, Shares = 100m, Price = 20m, Commission = 7.50m };
+
+            Assert.Equal(3992.5m, trade.Proceeds);
         }
 
         [Fact(DisplayName = "Sum of all trades is correct")]
@@ -68,7 +88,7 @@ namespace XUnitTestProject1
         [Fact(DisplayName = "Trade Direction has expected values")]
         public void TradeDirectionHasExpectedValues()
         {
-            var expected = new[] { "BUY", "SELL" };
+            var expected = new[] { "BUY", "SELL", "COVER", "SHORT" };
             var values = Enum.GetValues(typeof(Direction));
 
             foreach (var value in values)
