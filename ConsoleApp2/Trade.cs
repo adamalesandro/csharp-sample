@@ -28,6 +28,10 @@ namespace ConsoleApp2
                     return Shares * Price * Security.PricingFactor.Value + Commission;
                 else if (TradeDirection == Direction.SELL)
                     return Shares * Price * Security.PricingFactor.Value - Commission;
+                else if (TradeDirection == Direction.COVER)
+                    return Shares * Price * Security.PricingFactor.Value + Commission;
+                else if (TradeDirection == Direction.SHORT)
+                    return Shares * Price * Security.PricingFactor.Value - Commission;
                 else
                     throw new ArgumentException("Trade Direction was not supplied");
             }
@@ -37,6 +41,8 @@ namespace ConsoleApp2
     public enum Direction
     {
         BUY,
-        SELL
+        SELL,
+        COVER,
+        SHORT
     }
 }
