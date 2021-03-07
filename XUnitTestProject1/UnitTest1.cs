@@ -88,7 +88,7 @@ namespace XUnitTestProject1
         [Fact(DisplayName = "Trade Direction has expected values")]
         public void TradeDirectionHasExpectedValues()
         {
-            var expected = new[] { "BUY", "SELL" };
+            var expected = new[] { "BUY", "SELL", "COVER", "SHORT" };
             var values = Enum.GetValues(typeof(Direction));
 
             foreach (var value in values)
